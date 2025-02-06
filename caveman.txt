@@ -1,0 +1,94 @@
+Me have big JSON. Me want React code that use big JSON for question flow. Ugh!
+
+Me show JSON here:
+
+json
+Copy
+Edit
+{
+  "questionnaire_version": "1.0.0",
+  "upload_photo": true,
+  "start": "category_topics",
+  "end": {
+    "heading": "Because of you, a child...",
+    "body_photo_only": "(html) your photo will be sent...",
+    "body_photo_and_questionnaire": "(html) your photo and questionnaire will be sent...",
+    "body_skipped": "thanks for nothing!"
+  },
+  "category_topics": {
+    "type": "topic",
+    "cta": "Continue",
+    "options": [
+      {
+        "key": "family",
+        "title": "Family",
+        "image": "http://...jpg",
+        "go_to_key": "family_question"
+      },
+      {
+        "key": "pets",
+        "title": "Pets",
+        "image": "http://...jpg",
+        "go_to_key": "pets_question"
+      }
+    ]
+  },
+  "family_question": {
+    "type": "textarea",
+    "title": "What is your favorite way to spend time with your family?",
+    "title_for_child": "Here's what your sponsor says about family: ",
+    "cta": "Submit",
+    "go_to_key": "end"
+  },
+  "pets_question": {
+    "type": "textarea",
+    "title": "What role do pets play in your life?",
+    "title_for_child": "Here's what your sponsor says about pets: ",
+    "cta": "Submit",
+    "go_to_key": "end"
+  }
+}
+Grunt Work App Must Do:
+Check questionnaire_version
+Me want app to look at "questionnaire_version". If version "1.0.0", keep going. If not, show error or do fallback. Ugh.
+
+Photo Upload
+
+JSON say "upload_photo" is true. Must do photo step first.
+Me no care if real or fake. Just have big button that say "Upload Photo" or "Me pick photo."
+Start Node
+
+JSON say "start": "category_topics". This be first question.
+Then show next questions by reading "go_to_key".
+Also have skip button: skip go to "end" instantly. Ugh.
+Question Types
+
+"topic" type: show many options in grid. Each option have key, title, image. When user click, go next question from "go_to_key".
+"textarea" type: user put text in box. Then user click CTA to go next question or end.
+End Node
+
+When app reach "end", show text from end.heading. Then also show one of these:
+end.body_photo_only
+end.body_photo_and_questionnaire
+end.body_skipped
+Me want to collect user answers from any "textarea" question. Save them in object like { "family_question": "User typed..." }.
+If user skip all, show body_skipped. If user do photo but no question, maybe show body_photo_only. If user do everything, show body_photo_and_questionnaire.
+Acceptance
+
+Code read big JSON from widgetConfig.
+Code show photo upload.
+Code follow start key to show first question. Then next question. Then end. Ugh.
+Code do skip right to end.
+Must handle "topic" question type. Must handle "textarea" question type.
+End screen appear. Show lines from JSON.
+Me Want Code
+Me want React code that do all steps:
+
+Use function or class. Function good.
+Keep style simple, or no style.
+Show how app store answers (maybe in useState).
+Show skip button.
+Show end screen text.
+Me want short explanation after code. Then me happy.
+
+Grunt job done. Provide code! Ugh!
