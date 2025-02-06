@@ -1,0 +1,138 @@
+Prompt Body:
+
+I need you to generate a React component (or components) that drives a questionnaire flow based on the following JSON schema. The JSON will be stored in a widgetConfig object, and it looks like this:
+
+json
+Copy
+Edit
+{
+  "questionnaire_version": "1.0.0",
+  "upload_photo": true,
+  "start": "category_topics",
+  "end": {
+    "heading": "Because of you, a child...",
+    "body_photo_only": "(html) your photo will be sent...",
+    "body_photo_and_questionnaire": "(html) your photo and questionnaire will be sent...",
+    "body_skipped": "thanks for nothing!"
+  },
+  "category_topics": {
+    "type": "topic",
+    "cta": "Continue",
+    "options": [
+      {
+        "key": "family",
+        "title": "Family",
+        "image": "http://...jpg",
+        "go_to_key": "family_question"
+      },
+      {
+        "key": "pets",
+        "title": "Pets",
+        "image": "http://...jpg",
+        "go_to_key": "pets_question"
+      }
+    ]
+  },
+  "family_question": {
+    "type": "textarea",
+    "title": "What is your favorite way to spend time with your family?",
+    "title_for_child": "Here's what your sponsor says about family: ",
+    "cta": "Submit",
+    "go_to_key": "end"
+  },
+  "pets_question": {
+    "type": "textarea",
+    "title": "What role do pets play in your life?",
+    "title_for_child": "Here's what your sponsor says about pets: ",
+    "cta": "Submit",
+    "go_to_key": "end"
+  }
+}
+Requirements & Details
+Photo upload
+
+The upload_photo property (always true for now) indicates there is a photo upload step before any question.
+You can simulate or stub out the photo upload feature for now (e.g., show a placeholder or text "Photo Upload Step Here").
+Question Flow
+
+The start key in the JSON (e.g. "category_topics") tells us which question node to display first.
+Each question node can have a go_to_key that points to the next question node or "end".
+There should also be a “Skip” button in the UI that takes the user directly to "end".
+Question Types to Support
+
+"topic": A question that contains an options array. Each option has:
+key (an identifier for the option)
+title (to display in the UI)
+image (to display alongside the topic)
+go_to_key (the next question to navigate to)
+"textarea": A question that displays a text area input for user response.
+Has a title (the question to show)
+A cta (the label for the button to continue, e.g. "Submit")
+A go_to_key for the next step.
+End Screen
+
+Once the "end" key is reached, show an "end screen" with content taken from the end object in the JSON. For example, display:
+end.heading
+Possibly one of:
+end.body_photo_only
+end.body_photo_and_questionnaire
+end.body_skipped
+(Exact decision logic about which body text to display can be simplified or stubbed: e.g., if user answered all questions, show body_photo_and_questionnaire; if user skipped, show body_skipped; etc.)
+Future-Proofing
+
+Look at questionnaire_version to allow for potential future changes. For now, just check if questionnaire_version is "1.0.0" and proceed with the logic described above. If it’s a different version, you can fallback or gracefully handle it (e.g. show an error or fallback).
+Data Collection
+
+Collect the user’s answers to any "textarea" questions. (Topic-type answers don’t need to be stored or sent at this time, but you can store them if you like.)
+By the time user reaches the end, we want an object or array that represents these answers, e.g. { family_question: "..." } or { pets_question: "..." }.
+You can console-log them for now or show them in the UI.
+Acceptance Criteria
+
+The React app reads from the widgetConfig JSON.
+Shows a photo upload step first.
+Follows start -> [question nodes] -> end.
+Supports question type "topic" (multiple options, each leads to a next question).
+Supports question type "textarea".
+Has a skip button that goes directly to end.
+On the end screen, shows or uses the end object content.
+What to Deliver
+Please provide:
+
+A main React component (or set of components) that implements the above.
+Use either hooks (functional components) or class components. Functional is preferred.
+Show how you would store answers in component state, how you handle the skip button, and how you navigate from question to question.
+A quick example of how the end screen might look.
+Keep the styling minimal (or simply use inline styles).
+You can assume the widgetConfig is available as a prop or hardcoded for demonstration.
+Finally, provide a short explanation of your approach and how the code meets the requirements.
+
+## Design details
+Color Scheme:
+
+Dark blue background (#1a2b3c)
+Orange buttons (#ff6d00)
+Teal accents (#008294)
+White text
+Layout:
+
+Centered content with max-width
+World Vision logo at the top
+Consistent footer text
+Back/Skip navigation options
+Components:
+
+PhotoUpload: Simple placeholder with upload icon
+TopicQuestion: Grid of icon cards with teal icons
+TextAreaQuestion: Clean input with dark background
+EndScreen: Matches the sketch with icon, bullet points
+Typography:
+
+Clear hierarchy with different text sizes
+Uppercase for buttons and card titles
+Gray text for secondary information
+Navigation:
+
+Added back buttons
+Consistent skip options
+Clear primary actions
+The design now closely matches the provided screenshots while maintaining a professional and cohesive look throughout the flow.
