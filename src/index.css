@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --wv-orange: #ff6d00;
+  --wv-dark-blue: #1a2b3c;
+  --wv-teal: #008294;
+}
+
+body {
+  background-color: var(--wv-dark-blue);
+  color: white;
+}
+
+.btn-primary {
+  @apply bg-[#ff6d00] text-white font-semibold py-4 px-6 rounded-md w-full hover:bg-[#e66200] transition-colors;
+}
+
+.btn-secondary {
+  @apply text-[#008294] hover:text-[#006d7a] transition-colors;
+}
+
+.topic-card {
+  @apply bg-[#1f3346] border-2 border-[#2a4257] rounded-lg p-6 flex flex-col items-center gap-2 hover:border-[#008294] transition-colors cursor-pointer;
+}
+
+.textarea-input {
+  @apply w-full h-32 p-4 bg-[#1f3346] border-2 border-[#2a4257] rounded-lg text-white 
+  focus:border-[#008294] focus:ring-1 focus:ring-[#008294] focus:outline-none;
+}
