@@ -26,6 +26,18 @@ const widgetConfig = {
         title: "Pets",
         image: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800",
         go_to_key: "pets_question"
+      },
+      {
+        key: "hobby",
+        title: "Hobby",
+        image: "https://images.unsplash.com/photo-1523473827532-6c98b80b449c?w=800",
+        go_to_key: "hobby_question"
+      },
+      {
+        key: "food",
+        title: "Food",
+        image: "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=800",
+        go_to_key: "food_question"
       }
     ]
   },
@@ -40,6 +52,20 @@ const widgetConfig = {
     type: "textarea",
     title: "What role do pets play in your life?",
     title_for_child: "Here's what your sponsor says about pets: ",
+    cta: "SUBMIT",
+    go_to_key: "end"
+  },
+  hobby_question: {
+    type: "textarea",
+    title: "Tell us more about your hobby",
+    title_for_child: "Here's what your sponsor says about their hobby: ",
+    cta: "SUBMIT",
+    go_to_key: "end"
+  },
+  food_question: {
+    type: "textarea",
+    title: "Tell us more about your favorite food",
+    title_for_child: "Here's what your sponsor says about their favorite food: ",
     cta: "SUBMIT",
     go_to_key: "end"
   }

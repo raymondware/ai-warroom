@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { WidgetConfig, QuestionnaireAnswers, TopicOption } from '../types/questionnaire';
-import { PhotoUpload } from './PhotoUpload';
 import { TopicQuestion } from './TopicQuestion';
 import { TextAreaQuestion } from './TextAreaQuestion';
 import { EndScreen } from './EndScreen';
@@ -11,20 +10,12 @@ interface QuestionnaireProps {
 }
 
 export function Questionnaire({ config }: QuestionnaireProps) {
-  const [currentStep, setCurrentStep] = useState<'photo' | 'questions' | 'end'>('photo');
+  const [currentStep, setCurrentStep] = useState<'questions' | 'end'>('questions');
   const [currentQuestionKey, setCurrentQuestionKey] = useState<string>(config.start);
   const [answers, setAnswers] = useState<QuestionnaireAnswers>({});
   const [skipped, setSkipped] = useState(false);
 
   const currentQuestion = config[currentQuestionKey];
-
-  const handlePhotoComplete = () => {
-    setCurrentStep('questions');
-  };
-
-  const handleBackToPhoto = () => {
-    setCurrentStep('photo');
-  };
 
   const handleBackToTopics = () => {
     setCurrentQuestionKey(config.start);
@@ -84,19 +75,6 @@ export function Questionnaire({ config }: QuestionnaireProps) {
 
       <div className="relative" style={{ minHeight: '300px' }}>
         <AnimatePresence mode="wait">
-          {currentStep === 'photo' && (
-            <motion.div
-              key="photo"
-              style={{ position: 'absolute', width: '100%' }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <PhotoUpload onComplete={handlePhotoComplete} />
-            </motion.div>
-          )}
-
           {currentStep === 'questions' && currentQuestion?.type === 'topic' && (
             <motion.div
               key={currentQuestionKey + '-topic'}
@@ -109,7 +87,7 @@ export function Questionnaire({ config }: QuestionnaireProps) {
               <TopicQuestion
                 question={currentQuestion}
                 onSelect={handleTopicSelect}
-                onBack={handleBackToPhoto}
+                onBack={handleBackToTopics}
               />
             </motion.div>
           )}
