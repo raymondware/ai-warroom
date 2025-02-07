@@ -24,12 +24,7 @@ export function TopicQuestion({ question, onSelect, onBack }: TopicQuestionProps
     }
   };
 
-  // Append additional options ("hobby" and "food") to the originally provided options
-  const additionalOptions = [
-    { key: 'hobby', title: 'Hobby', image: '', go_to_key: 'hobby' },
-    { key: 'food', title: 'Food', image: '', go_to_key: 'hobby' },
-  ];
-  const options = [...question.options, ...additionalOptions];
+  const options = [...question.options];
 
   return (
     <div className="px-4 mx-auto max-w-md">
